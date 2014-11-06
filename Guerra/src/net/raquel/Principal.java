@@ -11,31 +11,27 @@ import java.util.ArrayList;
  *
  */
 public class Principal extends GraphicsProgram {
-ArrayList<LLUITADORESQ> guerreros;
-ArrayList<LLUITADORDRET> peleones;
+
 public void run(){
+
 setSize(600,600);
-guerreros = new ArrayList();
-peleones = new ArrayList();
-int posicion = 0;
-for (int i = 0 ; i < 10;i++){
-	guerreros.add(new LLUITADORESQ(i,posicion));
-	peleones.add(new LLUITADORDRET(i,posicion));
-	posicion = posicion + 50;
+CampJoc campo = new CampJoc(this);
+Exercit exercit = new Exercit(0,550);
+for (int i = 0; i < 10; i++){
+	Soldat a = new Soldat("esquerra.jpg",+1);
+	add(a.getImatge());
+	exercit.afegirsoldat(a);
 }
-
-for (int i = 0; i < guerreros.size() ; i++){
-	add(guerreros.get(i).getImatge());
-	add(peleones.get(i).getImatge());
+campo.afegirexercit(exercit);
+exercit = new Exercit(550,0);
+for (int i = 0; i < 10; i++){
+	Soldat a = new Soldat("dreta.gif",-1);
+	add(a.getImatge());
+	exercit.afegirsoldat(a);
 }
-while(1 >0){
-for (int i = 0; i < guerreros.size(); i++){
+campo.afegirexercit(exercit);
 
-	guerreros.get(i).getImatge().move(5, 0);
-	peleones.get(i).getImatge().move(-5, 0);
-
-
+	campo.posicionar();
+	campo.mover();
 }
-pause(100);
 }
-}}
